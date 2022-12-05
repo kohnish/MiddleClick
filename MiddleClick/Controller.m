@@ -103,10 +103,9 @@ BOOL wasThreeDown;
           err);
     IONotificationPortDestroy(port);
   } else {
-    /// Iterate through all the existing entries to arm the notification.
     io_object_t item;
     while ((item = IOIteratorNext(handle))) {
-      CFRelease(item);
+      IOObjectRelease(item);
     }
   }
   
@@ -302,10 +301,9 @@ static void restartApp()
 void multitouchDeviceAddedCallback(void* _controller,
                                    io_iterator_t iterator)
 {
-  /// Loop through all the returned items.
   io_object_t item;
   while ((item = IOIteratorNext(iterator))) {
-    CFRelease(item);
+    IOObjectRelease(item);
   }
   
   NSLog(@"Multitouch device added, restarting...");
